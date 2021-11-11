@@ -22,26 +22,35 @@ public class Station {
     @Column(nullable = false)
     private String name;
 
-    public Station() {
+    @ManyToOne
+    private Line line;
+
+    protected Station() {
     }
 
     protected Station(String name) {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public Line getLine() {
+        return line;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLine(Line line) {
+        this.line = line;
+        line.getStations().add(this);
+    }
+
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void changeName(String name) {
         this.name = name;
     }
 }
